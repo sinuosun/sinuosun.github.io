@@ -1,18 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sinuo Sun</title>
+<meta charset="UTF-8">
+<title>Sinuo Sun</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    /* 渐变背景 */
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+
+    @keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+    }
+    /* 让背景更丝滑 */
+    height: 100vh;
+}
+
+/* 内容居中 */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 80px 20px;
+}
+
+/* 标题 */
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+/* 卡片效果 */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+
+    backdrop-filter: blur(10px);
+}
+
+/* 链接 */
+a {
+    color: #ffd700;
+    text-decoration: none;
+}
+</style>
+
 </head>
+
 <body>
-    <h1>Sinuo Sun</h1>
-    <p>PKU Engineering Student</p>
 
-    <h2>Projects</h2>
-    <ul>
-        <li><a href="https://github.com/sinuosun/Just-a-simple-game">Simple Game</a></li>
-    </ul>
+<div class="container">
 
-    <h2>Contact</h2>
-    <p>Email: your_email@example.com</p>
+<h1>Sinuo Sun</h1>
+<p>PKU College of Engineering Student</p>
+
+<div class="card">
+<h2>About</h2>
+<p>I am an undergraduate student at Peking University, exploring AI, mathematics, and embedded systems.</p>
+</div>
+
+<div class="card">
+<h2>Projects</h2>
+<ul>
+  <li><a href="https://github.com/sinuosun/Just-a-simple-game">LLM Agent Game</a></li>
+</ul>
+</div>
+
+<div class="card">
+<h2>Contact</h2>
+<p>Email: 2339026706@qq.com</p>
+</div>
+
+</div>
+
 </body>
 </html>
