@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sinuo Sun</title>
+</head>
+<body>
+    <h1>Sinuo Sun</h1>
+    <p>PKU Engineering Student</p>
+
+    <h2>Projects</h2>
+    <ul>
+        <li><a href="https://github.com/sinuosun/Just-a-simple-game">Simple Game</a></li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Email: your_email@example.com</p>
+</body>
+</html>
