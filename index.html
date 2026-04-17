@@ -1,85 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sinuo Sun</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinuo Sun | PKU</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-color: #ffd700;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* 更加深邃的动态渐变 */
+            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            overflow-x: hidden;
+        }
 
-    /* 渐变背景 */
-    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
-    background-size: 400% 400%;
-    animation: gradientMove 10s ease infinite;
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    @keyframes gradientMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-    }
-    /* 让背景更丝滑 */
-    height: 100vh;
-}
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 40px 0;
+            z-index: 1;
+        }
 
-/* 内容居中 */
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 80px 20px;
-}
+        /* 头部样式优化 */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease;
+        }
 
-/* 标题 */
-h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* 卡片效果 */
-.card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
 
-    backdrop-filter: blur(10px);
-}
+        /* 毛玻璃卡片布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
 
-/* 链接 */
-a {
-    color: #ffd700;
-    text-decoration: none;
-}
-</style>
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+        }
+
+        /* 链接样式 */
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: var(--accent-color);
+            color: #000;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .project-link:hover {
+            background: #fff;
+            transform: scale(1.05);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
+    <header>
+        <h1>Sinuo Sun</h1>
+        <p class="subtitle">Peking University | College of Engineering</p>
+    </header>
 
-<h1>Sinuo Sun</h1>
-<p>PKU College of Engineering Student</p>
+    <div class="grid">
+        <div class="card" style="animation: fadeInUp 0.6s ease 0.2s backwards;">
+            <h2>About Me</h2>
+            <p>Undergraduate student exploring the intersection of <strong>Mathematics</strong>, <strong>Embedded Systems</strong>, and <strong>AI Agents</strong>.</p>
+            <p>Focusing on linear spaces and algorithm efficiency.</p>
+        </div>
 
-<div class="card">
-<h2>About</h2>
-<p>I am an undergraduate student at Peking University, exploring AI, mathematics, and embedded systems.</p>
-</div>
+        <div class="card" style="animation: fadeInUp 0.6s ease 0.4s backwards;">
+            <h2>Key Projects</h2>
+            <p><strong>LLM Agent Game</strong></p>
+            <p>An experimental project integrating Large Language Models into interactive gaming environments.</p>
+            <a href="https://github.com/sinuosun/Just-a-simple-game" class="project-link">View Project</a>
+        </div>
 
-<div class="card">
-<h2>Projects</h2>
-<ul>
-  <li><a href="https://github.com/sinuosun/Just-a-simple-game">LLM Agent Game</a></li>
-</ul>
-</div>
-
-<div class="card">
-<h2>Contact</h2>
-<p>Email: 2339026706@qq.com</p>
-</div>
-
+        <div class="card" style="animation: fadeInUp 0.6s ease 0.6s backwards;">
+            <h2>Contact</h2>
+            <p>📧 2339026706@qq.com</p>
+            <p>📍 No.5 Yiheyuan Road, Beijing</p>
+            <p><em>"Our life is what our thoughts make it."</em></p>
+        </div>
+    </div>
 </div>
 
 </body>
