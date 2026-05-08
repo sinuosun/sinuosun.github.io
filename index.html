@@ -1,159 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello!Sinuo Sun | PKU</title>
-    <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --accent-color: #ffd700;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinuo Sun | PKU</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --panel: #11110f;
+      --panel-soft: #1b1a17;
+      --text: #151515;
+      --muted: #666158;
+      --line: #d9d1c4;
+      --soft: #ebe6dc;
+      --accent: #c96442;
+      --accent-soft: #ead2c6;
+      --white: #fffaf2;
+      --radius-xl: 28px;
+      --radius-md: 16px;
+      --shadow: 0 24px 80px rgba(33, 27, 18, 0.12);
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* 更加深邃的动态渐变 */
-            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            overflow-x: hidden;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .container {
-            max-width: 900px;
-            width: 90%;
-            padding: 40px 0;
-            z-index: 1;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(201, 100, 66, 0.10), transparent 28%),
+        radial-gradient(circle at 82% 35%, rgba(0, 0, 0, 0.05), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-        /* 头部样式优化 */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInUp 1s ease;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .page {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
 
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-top: 10px;
-        }
+    .topbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(21, 21, 21, 0.08);
+    }
 
-        /* 毛玻璃卡片布局 */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
 
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      transition: transform 0.35s ease;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+    .brand:hover .mark {
+      transform: rotate(-12deg) scale(1.08);
+    }
 
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--glass-border);
-            padding-bottom: 10px;
-        }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #26231f;
+      font-size: 14px;
+    }
 
-        /* 链接样式 */
-        .project-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 15px;
-            background: var(--accent-color);
-            color: #000;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
+    nav a {
+      position: relative;
+      padding: 8px 0;
+    }
 
-        .project-link:hover {
-            background: #fff;
-            transform: scale(1.05);
-        }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 3px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
 
-        /* 动画 */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-        /* 响应式调整 */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-        }
-    </style>
+    .mail-btn {
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .mail-btn:hover {
+      transform: translateY(-2px);
+      background: transparent;
+      color: var(--text);
+    }
+
+    .quote-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 36px 0 18px;
+      color: var(--muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(18px, 2.3vw, 28px);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .quote-strip::before,
+    .quote-strip::after {
+      content: "";
+      width: min(120px, 12vw);
+      height: 1px;
+      background: var(--line);
+    }
+
+    .hero {
+      padding: 62px 0 58px;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 76px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(54px, 9vw, 112px);
+      line-height: 0.93;
+      letter-spacing: -0.07em;
+      max-width: 760px;
+    }
+
+    .underline {
+      text-decoration: underline;
+      text-decoration-thickness: 0.07em;
+      text-underline-offset: 0.10em;
+      text-decoration-color: rgba(21, 21, 21, 0.75);
+      transition: text-decoration-color 0.2s ease;
+    }
+
+    .underline:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    .hero-copy {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.18;
+      color: #201c18;
+      max-width: 420px;
+    }
+
+    .hero-copy span {
+      color: var(--muted);
+    }
+
+    .feature-panel {
+      min-height: 420px;
+      margin-bottom: 78px;
+      border-radius: var(--radius-xl);
+      background: var(--panel);
+      color: var(--white);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      box-shadow: var(--shadow);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .feature-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, transparent 0 50%, rgba(255, 255, 255, 0.05) 50% 51%, transparent 51%),
+        radial-gradient(circle at var(--mx, 72%) var(--my, 44%), rgba(201, 100, 66, 0.24), transparent 22%);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    .panel-copy {
+      padding: clamp(34px, 6vw, 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .panel-copy h2 {
+      margin: 0 0 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+    }
+
+    .panel-copy p {
+      margin: 0;
+      color: rgba(255, 250, 242, 0.76);
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 380px;
+    }
+
+    .pattern {
+      position: relative;
+      min-height: 360px;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .cell {
+      position: absolute;
+      border: 1px solid rgba(255, 250, 242, 0.72);
+      border-radius: 34% 66% 49% 51% / 44% 48% 52% 56%;
+      opacity: 0.38;
+      transform: rotate(var(--r));
+      transition: transform 0.35s ease, opacity 0.35s ease, border-color 0.35s ease;
+    }
+
+    .feature-panel:hover .cell {
+      opacity: 0.72;
+      border-color: rgba(255, 250, 242, 0.95);
+      transform: rotate(calc(var(--r) + 8deg)) scale(1.04);
+    }
+
+    .cell:nth-child(1) { width: 150px; height: 120px; left: 10%; top: 15%; --r: 8deg; }
+    .cell:nth-child(2) { width: 180px; height: 136px; left: 42%; top: 10%; --r: -14deg; }
+    .cell:nth-child(3) { width: 128px; height: 156px; left: 72%; top: 24%; --r: 18deg; }
+    .cell:nth-child(4) { width: 210px; height: 150px; left: 20%; top: 48%; --r: -4deg; }
+    .cell:nth-child(5) { width: 170px; height: 190px; left: 56%; top: 46%; --r: 11deg; }
+    .cell:nth-child(6) { width: 115px; height: 112px; left: 4%; top: 72%; --r: -19deg; }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 0 0 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.55;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 70px;
+    }
+
+    .card {
+      min-height: 252px;
+      background: rgba(255, 250, 242, 0.42);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 250, 242, 0.72);
+      box-shadow: 0 18px 60px rgba(33, 27, 18, 0.10);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .card .tag {
+      width: fit-content;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card .detail {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+
+    .card .detail > div {
+      overflow: hidden;
+    }
+
+    .card.active .detail {
+      grid-template-rows: 1fr;
+    }
+
+    .question-box {
+      background: var(--soft);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      padding: clamp(26px, 5vw, 48px);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 70px;
+    }
+
+    .question-box h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .question-box p {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 18px 0 0;
+    }
+
+    .prompt-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 8px;
+    }
+
+    .prompt-row input {
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      padding: 12px 8px;
+      font: inherit;
+      color: var(--text);
+    }
+
+    .prompt-row button {
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .prompt-row button:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
+    .answer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.5;
+      min-height: 56px;
+    }
+
+    footer {
+      padding: 32px 0 46px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeIn 0.75s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .hero,
+      .feature-panel,
+      .question-box {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        gap: 30px;
+        padding-top: 42px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .section-title p {
+        margin-top: 14px;
+      }
+
+      .pattern {
+        min-height: 300px;
+        border-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 26px, 1180px);
+      }
+
+      .quote-strip::before,
+      .quote-strip::after {
+        display: none;
+      }
+
+      .topbar {
+        height: 64px;
+      }
+
+      .mail-btn {
+        padding: 9px 12px;
+      }
+
+      .feature-panel {
+        border-radius: 20px;
+      }
+
+      .panel-copy,
+      .card,
+      .question-box {
+        padding: 22px;
+      }
+
+      .prompt-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Sinuo Sun homepage">
+        <span class="mark">S</span>
+        <span>Sinuo Sun</span>
+      </a>
 
-<div class="container">
-    <header>
-        <h1>Sinuo Sun</h1>
-        <p class="subtitle">Peking University | College of Engineering</p>
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#questions">Questions</a>
+      </nav>
+
+      <a class="mail-btn" href="mailto:Monet_Snow@outlook.com">Contact</a>
     </header>
 
-    <div class="grid">
-        <div class="card" style="animation: fadeInUp 0.6s ease 0.2s backwards;">
-            <h2>About Me</h2>
-            <p>Undergraduate student exploring the intersection of <strong>Mathematics</strong>, <strong>Embedded Systems</strong>, and <strong>AI Agents</strong>.</p>
-            <p>Passion for <strong>Computer Sience</strong>,<strong>Robot</strong>,and <strong>Artificial Intelligence</strong>.</p>
+    <main id="top">
+      <div class="quote-strip fade-in">认知始于对无知的承认，你今日因何而疑惑？</div>
+
+      <section class="hero">
+        <div class="fade-in delay-1">
+          <div class="eyebrow">Peking University · College of Engineering</div>
+          <h1>
+            Learning at the edge of <span class="underline">systems</span>,
+            <span class="underline">reasoning</span>, and <span class="underline">creation</span>.
+          </h1>
         </div>
 
-        <div class="card" style="animation: fadeInUp 0.6s ease 0.4s backwards;">
-            <h2>Key Projects</h2>
-            <p><strong>LLM Agent Game</strong></p>
-            <p>An experimental project integrating Large Language Models into interactive gaming environments.</p>
-            <a href="https://github.com/sinuosun/Just-a-simple-game" class="project-link">View Project</a>
+        <p class="hero-copy fade-in delay-2">
+          I am an undergraduate student exploring mathematics, embedded systems, and AI agents.
+          <span>My interests live between rigorous structure and imaginative construction.</span>
+        </p>
+      </section>
+
+      <section class="feature-panel fade-in delay-3" aria-label="Personal introduction panel">
+        <div class="panel-copy">
+          <h2>Think,<br />build,<br />revise.</h2>
+          <p>
+            I enjoy turning abstract ideas into working prototypes, and turning confusing questions
+            into clearer models. For me, engineering is not only implementation, but also a disciplined way of seeing.
+          </p>
+        </div>
+        <div class="pattern" aria-hidden="true">
+          <span class="cell"></span>
+          <span class="cell"></span>
+          <span class="cell"></span>
+          <span class="cell"></span>
+          <span class="cell"></span>
+          <span class="cell"></span>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title">
+          <h2>About me</h2>
+          <p>
+            A compact personal page for academic identity, technical exploration, and future projects.
+            Click the cards below for a little more context.
+          </p>
         </div>
 
-        <div class="card" style="animation: fadeInUp 0.6s ease 0.6s backwards;">
-            <h2>Contact</h2>
-            <p>📧 2339026706@qq.com</p>
-            <p>📍 No.5 Yiheyuan Road, Beijing</p>
-            <p><em>"Our life is what our thoughts make it."</em></p>
-        </div>
-    </div>
-</div>
+        <div class="cards">
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">Foundation</span>
+              <h3>Mathematics as language</h3>
+              <p>
+                I am building a foundation in analysis, linear algebra, and physics, treating mathematics as a way to describe structure precisely.
+              </p>
+              <div class="detail"><div><p>
+                Current curiosities include eigenvalues, geometric intuition, optimization, and the way abstract concepts become computational tools.
+              </p></div></div>
+            </div>
+          </article>
 
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">Engineering</span>
+              <h3>Systems that touch reality</h3>
+              <p>
+                I am interested in embedded systems, sensors, robotics, and the small but concrete details that make hardware behave correctly.
+              </p>
+              <div class="detail"><div><p>
+                I like projects where code meets signals, motion, constraints, and imperfect real-world feedback.
+              </p></div></div>
+            </div>
+          </article>
+
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">AI</span>
+              <h3>Agents, cognition, and tools</h3>
+              <p>
+                I am exploring how AI agents can reason, interact, remember, and assist human creativity without replacing human judgment.
+              </p>
+              <div class="detail"><div><p>
+                Earlier game-agent experiments are currently paused, but the broader question remains: how should intelligent tools cooperate with us?
+              </p></div></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="focus">
+        <div class="section-title">
+          <h2>Current focus</h2>
+          <p>
+            No fixed flagship project for now. The page is designed to leave space for future work, notes, essays, and prototypes.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">Learning</span>
+              <h3>Core coursework</h3>
+              <p>Mathematical analysis, higher algebra, general physics, data structures, and algorithmic thinking.</p>
+              <div class="detail"><div><p>These are not only courses, but also the grammar of future engineering work.</p></div></div>
+            </div>
+          </article>
+
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">Making</span>
+              <h3>Small prototypes</h3>
+              <p>Practical experiments in Python, web design, embedded development, and local AI-assisted workflows.</p>
+              <div class="detail"><div><p>Small projects are a low-risk way to test ideas before they become larger systems.</p></div></div>
+            </div>
+          </article>
+
+          <article class="card" tabindex="0">
+            <div>
+              <span class="tag">Reflection</span>
+              <h3>Writing and perception</h3>
+              <p>Photography, literature, and essays help me keep technical work connected with human experience.</p>
+              <div class="detail"><div><p>Clarity is not only a property of code or proofs; it is also a habit of attention.</p></div></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="questions" class="question-box">
+        <div>
+          <h2>What are you curious about?</h2>
+          <p>
+            A small interactive corner: type a question or press the button, and the page will return a reflective prompt.
+          </p>
+        </div>
+
+        <div>
+          <div class="prompt-row">
+            <input id="questionInput" type="text" placeholder="Type a question, e.g. What should I build next?" />
+            <button id="askButton">Reflect</button>
+          </div>
+          <div id="answer" class="answer">Try asking something. The best questions usually reveal the next step.</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Sinuo Sun</span>
+      <span>Peking University · Beijing · <a href="mailto:Monet_Snow@outlook.com">Monet_Snow@outlook.com</a></span>
+    </footer>
+  </div>
+
+  <script>
+    const panel = document.querySelector('.feature-panel');
+    panel.addEventListener('pointermove', (event) => {
+      const rect = panel.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      panel.style.setProperty('--mx', `${x}%`);
+      panel.style.setProperty('--my', `${y}%`);
+    });
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card) => {
+      const toggle = () => card.classList.toggle('active');
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    const prompts = [
+      'Can this question be made smaller, sharper, and testable?',
+      'What assumption is hidden inside this question?',
+      'Which part is a fact, which part is a feeling, and which part is still unknown?',
+      'What would a simple prototype reveal within one afternoon?',
+      'If the answer were obvious in hindsight, what pattern would it probably have?',
+      'What would change if you explained this to a beginner?'
+    ];
+
+    const input = document.getElementById('questionInput');
+    const button = document.getElementById('askButton');
+    const answer = document.getElementById('answer');
+
+    button.addEventListener('click', () => {
+      const question = input.value.trim();
+      const base = prompts[Math.floor(Math.random() * prompts.length)];
+      answer.textContent = question ? `For “${question}”: ${base}` : base;
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
