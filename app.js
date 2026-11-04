@@ -59,6 +59,8 @@ const input = document.querySelector('#question-input');
 const answer = document.querySelector('#reflection-answer');
 const menuButton = document.querySelector('#menu-toggle');
 const mobileNav = document.querySelector('#mobile-nav');
+const motionButton = document.querySelector('#motion-toggle');
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const english = new Map();
 document.querySelectorAll('[data-i18n]').forEach(element => english.set(element.dataset.i18n, element.innerHTML));
 let language = 'en';
@@ -87,6 +89,7 @@ function setLanguage(next) {
   document.querySelector('.contact-arrow').setAttribute('aria-label', language === 'zh' ? '给 Sinuo Sun 发邮件' : 'Email Sinuo Sun');
   document.title = language === 'zh' ? 'Sinuo Sun — 一份持续生长的个人手记' : 'Sinuo Sun — A personal field notebook';
   updateMenuLabel();
+  updateMotionLabel();
   if (hasReflected) renderReflection();
   // Only a display preference is stored. Questions remain in page memory.
   try { localStorage.setItem('sinuo-language', language); } catch { /* Private browsing can restrict storage. */ }
@@ -103,6 +106,30 @@ function closeMenu(restoreFocus = false) {
   updateMenuLabel();
   if (restoreFocus) menuButton.focus();
 }
+
+function updateMotionLabel() {
+  const paused = motionButton.getAttribute('aria-pressed') === 'true';
+  const label = language === 'zh'
+    ? (paused ? '播放装饰动效' : '暂停装饰动效')
+    : (paused ? 'Play decorative motion' : 'Pause decorative motion');
+  motionButton.setAttribute('aria-label', label);
+  motionButton.title = label;
+}
+
+motionButton.hidden = motionPreference.matches;
+updateMotionLabel();
+motionButton.addEventListener('click', () => {
+  const paused = motionButton.getAttribute('aria-pressed') !== 'true';
+  motionButton.setAttribute('aria-pressed', String(paused));
+  document.documentElement.classList.toggle('motion-paused', paused);
+  updateMotionLabel();
+});
+motionPreference.addEventListener('change', event => {
+  motionButton.hidden = event.matches;
+  // Keep all content visible when the OS preference changes mid-visit.
+  document.querySelectorAll('.reveal').forEach(element => element.classList.add('is-visible'));
+  document.documentElement.classList.toggle('motion-enabled', !event.matches && 'IntersectionObserver' in window);
+});
 
 languageButton.hidden = false;
 menuButton.hidden = false;
@@ -140,4 +167,12 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
   document.documentElement.classList.add('motion-enabled');
+}
+
+// Stop the two repeating decorations when their section leaves the viewport.
+if ('IntersectionObserver' in window) {
+  const heroObserver = new IntersectionObserver(entries => {
+    document.documentElement.classList.toggle('hero-offscreen', !entries[0].isIntersecting);
+  });
+  heroObserver.observe(document.querySelector('.hero'));
 }

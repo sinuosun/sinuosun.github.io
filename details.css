@@ -1,0 +1,477 @@
+/* A second layer: print registration, pencil notes, and original scientific sketches. */
+body{
+  background-image:url('assets/paper.svg')
+}
+.hero-intro,.about-title-group{
+  position:relative;
+  min-width:0
+}
+.margin-note{
+  position:absolute;
+  left:-29px;
+  top:40px;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font:8px var(--mono);
+  letter-spacing:2px;
+  color:var(--muted);
+  opacity:.65
+}
+.name-sun{
+  width:112px;
+  height:112px;
+  right:-145px;
+  bottom:7px;
+  animation:none;
+  overflow:visible;
+  pointer-events:none
+}
+.seal-ring{
+  stroke-width:.5;
+  stroke-dasharray:1 5;
+  opacity:.55
+}
+.seal-type{
+  font:10px var(--mono);
+  letter-spacing:2px;
+  fill:currentColor;
+  stroke:none
+}
+.name-sun .seal-sun{
+  width:50px;
+  height:50px;
+  stroke-width:1
+}
+.motion-enabled .name-sun{
+  animation:slow-spin 70s linear infinite
+}
+.hero-art{
+  isolation:isolate
+}
+.hero-art::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url('assets/paper.svg');
+  opacity:.4;
+  pointer-events:none;
+  z-index:3
+}
+.plate-corner{
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-color:#d7e9a66b;
+  border-style:solid;
+  border-width:0;
+  z-index:4;
+  pointer-events:none
+}
+.corner-tl{
+  left:11px;
+  top:11px;
+  border-left-width:1px;
+  border-top-width:1px
+}
+.corner-tr{
+  right:11px;
+  top:11px;
+  border-right-width:1px;
+  border-top-width:1px
+}
+.corner-bl{
+  left:11px;
+  bottom:11px;
+  border-left-width:1px;
+  border-bottom-width:1px
+}
+.corner-br{
+  right:11px;
+  bottom:11px;
+  border-right-width:1px;
+  border-bottom-width:1px
+}
+.art-top{
+  min-height:28px;
+  margin-top:20px;
+  z-index:5
+}
+.motion-toggle{
+  height:28px;
+  width:28px;
+  display:grid;
+  place-items:center;
+  border:1px solid #d7e9a644;
+  border-radius:50%;
+  color:var(--lime);
+  padding:0
+}
+.motion-toggle:hover{
+  background:#d7e9a61a
+}
+.motion-toggle:focus-visible{
+  outline-color:var(--lime);
+  outline-offset:4px
+}
+.motion-icon{
+  width:8px;
+  height:10px;
+  border-inline:2px solid currentColor
+}
+.motion-toggle[aria-pressed=true] .motion-icon{
+  width:0;
+  height:0;
+  border:5px solid transparent;
+  border-right:0;
+  border-left:8px solid currentColor;
+  margin-left:2px
+}
+.specimen-note{
+  position:absolute;
+  right:40px;
+  top:79px;
+  color:#d7e9a6b0;
+  transform:rotate(-8deg);
+  font:italic 15px var(--serif);
+  z-index:2;
+  pointer-events:none
+}
+.specimen-note svg{
+  width:75px;
+  height:40px;
+  margin:4px 0 0 20px;
+  stroke-width:1
+}
+.motion-enabled .orbit-wrap img{
+  animation:specimen-float 12s ease-in-out infinite
+}
+.pencil-underline{
+  width:260px;
+  max-width:76%;
+  height:17px;
+  color:var(--orange);
+  stroke-width:1.05;
+  margin-top:9px;
+  transform:rotate(-1deg);
+  pointer-events:none
+}
+.thought-flow{
+  width:295px;
+  max-width:95%;
+  height:80px;
+  margin-top:25px;
+  stroke-width:.85;
+  color:var(--green);
+  pointer-events:none
+}
+.thought-flow text{
+  fill:var(--green);
+  stroke:none;
+  font:italic 15px var(--serif)
+}
+.thought-flow .flow-caption{
+  font:8px var(--mono);
+  fill:var(--muted);
+  letter-spacing:.3px
+}
+.flow-arrow{
+  color:var(--orange)
+}
+.flow-return{
+  stroke-dasharray:3 5;
+  opacity:.45
+}
+.explore-heading{
+  position:relative
+}
+.explore-heading::after{
+  content:'';
+  width:110px;
+  height:110px;
+  position:absolute;
+  right:310px;
+  top:-30px;
+  border:1px solid #d7e9a629;
+  border-radius:50%;
+  background:repeating-radial-gradient(ellipse at center,transparent 0 11px,#d7e9a617 12px,transparent 13px);
+  transform:rotate(-25deg) scaleX(.6);
+  pointer-events:none
+}
+.notebook-figure{
+  height:136px;
+  margin:-13px 0 27px;
+  position:relative;
+  overflow:hidden;
+  color:var(--green)
+}
+.notebook-figure svg{
+  width:100%;
+  height:100%;
+  stroke-width:.95;
+  overflow:visible
+}
+.notebook-figure text{
+  font:italic 9px var(--serif);
+  fill:var(--muted);
+  stroke:none
+}
+.figure-grid{
+  stroke:var(--line);
+  stroke-width:.6;
+  stroke-dasharray:2 5
+}
+.figure-axis{
+  opacity:.4;
+  stroke-width:.7
+}
+.wave-line,.circuit-pulse{
+  stroke:var(--orange);
+  stroke-width:1.5
+}
+.figure-point{
+  fill:var(--orange);
+  stroke:var(--paper);
+  stroke-width:1.6;
+  transform-box:fill-box;
+  transform-origin:center;
+  transition:transform .4s
+}
+.chip-core{
+  fill:#253c3008;
+  stroke-opacity:.35
+}
+.now-item:hover .figure-point{
+  transform:scale(1.4)
+}
+.now-item:hover .notebook-figure{
+  color:var(--orange)
+}
+.now-item{
+  transition:background .3s
+}
+.motion-enabled .reveal .sketch-stroke{
+  stroke-dasharray:1;
+  stroke-dashoffset:1
+}
+.motion-enabled .is-visible .sketch-stroke{
+  animation:ink-in 1.5s ease .12s forwards
+}
+.question-inner{
+  box-shadow:5px 6px 0 #253c3009;
+  isolation:isolate
+}
+.paper-fold{
+  position:absolute;
+  right:0;
+  top:0;
+  width:30px;
+  height:30px;
+  background:linear-gradient(45deg,#aabd82 0 49%,var(--paper) 50%);
+  filter:drop-shadow(-2px 2px 1px #253c3012);
+  pointer-events:none
+}
+.question-sun{
+  position:relative
+}
+.contact{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden
+}
+.contact-orbits{
+  position:absolute;
+  z-index:-1;
+  right:-10px;
+  top:40px;
+  width:355px;
+  height:355px;
+  color:var(--green);
+  stroke-width:.65;
+  opacity:.12;
+  pointer-events:none;
+  transition:transform 1s ease
+}
+.contact-orbits .orbit-point{
+  fill:var(--orange);
+  stroke:none
+}
+.contact:has(.contact-arrow:hover) .contact-orbits{
+  transform:rotate(9deg)
+}
+.contact-heading,.contact-bottom,.contact>.section-label{
+  position:relative;
+  z-index:1
+}
+.contact-arrow{
+  background:var(--paper)
+}
+.motion-paused .name-sun,.motion-paused .orbit-wrap img,.hero-offscreen .name-sun,.hero-offscreen .orbit-wrap img{
+  animation-play-state:paused
+}
+.motion-paused .sketch-stroke{
+  animation:none!important;
+  stroke-dashoffset:0!important
+}
+.motion-paused .reveal{
+  transition:none
+}
+@keyframes specimen-float{
+  0%,100%{
+    transform:translateY(0) rotate(-1deg)
+  }
+  50%{
+    transform:translateY(-7px) rotate(1deg)
+  }
+}
+@keyframes ink-in{
+  to{
+    stroke-dashoffset:0
+  }
+}
+@media(max-width:1150px){
+  .name-sun{
+    width:90px;
+    height:90px;
+    right:-110px;
+    bottom:0
+  }
+  .specimen-note{
+    font-size:12px;
+    right:30px;
+    top:72px
+  }
+  .explore-heading::after{
+    display:none
+  }
+  .thought-flow{
+    margin-top:18px;
+    width:255px
+  }
+  .notebook-figure{
+    height:115px
+  }
+}
+@media(max-width:900px){
+  .name-sun{
+    width:76px;
+    height:76px;
+    right:-87px;
+    bottom:1px
+  }
+  .specimen-note{
+    right:23px;
+    top:68px;
+    font-size:11px
+  }
+  .notebook-figure{
+    height:100px;
+    margin-bottom:23px
+  }
+  .thought-flow{
+    width:240px
+  }
+  .pencil-underline{
+    width:225px
+  }
+  .contact-orbits{
+    width:285px;
+    height:285px
+  }
+}
+@media(max-width:700px){
+  .margin-note{
+    display:none
+  }
+  .name-sun{
+    width:78px;
+    height:78px;
+    right:0;
+    bottom:9px
+  }
+  .name-sun .seal-sun{
+    width:50px;
+    height:50px
+  }
+  .specimen-note{
+    top:72px;
+    right:28px;
+    font-size:13px
+  }
+  .art-top{
+    margin-top:18px
+  }
+  .thought-flow{
+    width:260px;
+    max-width:90%;
+    height:65px;
+    margin-top:16px
+  }
+  .pencil-underline{
+    width:240px
+  }
+  .notebook-figure{
+    height:90px;
+    margin:0 0 20px;
+    max-width:320px
+  }
+  .now-item .item-top{
+    margin-bottom:17px
+  }
+  .contact-orbits{
+    width:210px;
+    height:210px;
+    top:54px;
+    right:-48px;
+    opacity:.1
+  }
+  .paper-fold{
+    width:23px;
+    height:23px
+  }
+}
+@media(max-width:370px){
+  .name-sun{
+    width:64px;
+    height:64px;
+    right:0;
+    bottom:11px
+  }
+  .specimen-note{
+    font-size:11px;
+    right:24px
+  }
+  .thought-flow{
+    width:235px
+  }
+  .pencil-underline{
+    width:210px
+  }
+  html[lang=zh-CN] .contact .editorial-title{
+    font-size:30px
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .name-sun,.orbit-wrap img,.sketch-stroke{
+    animation:none!important
+  }
+  .motion-enabled .reveal .sketch-stroke{
+    stroke-dashoffset:0
+  }
+  .contact-orbits,.figure-point{
+    transition:none
+  }
+  .motion-toggle{
+    display:none!important
+  }
+}
+@media print{
+  body{
+    background-image:none
+  }
+  .name-sun,.thought-flow,.pencil-underline,.contact-orbits,.notebook-figure,.paper-fold,.specimen-note,.margin-note{
+    display:none
+  }
+  .question-inner{
+    box-shadow:none
+  }
+}

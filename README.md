@@ -17,6 +17,7 @@ python3 -m http.server 4173 --bind 127.0.0.1
 - `index.html`：英文正文、个人信息、邮箱、链接与页面结构。英语是默认语言，关闭 JavaScript 仍可阅读正文和展开研究方向。
 - `app.js`：中文译文 `translations`、双语反思提示 `prompts`、语言切换、手机导航与渐入效果。添加内容时，请同步补齐译文。
 - `styles.css`：所有视觉样式与响应式断点。开头的 CSS 变量可调整色彩与字体。
+- `details.css`：纸纹、圆章、图版定位角标、手绘批注、技术插图和装饰动效。
 - `assets/orbit.svg`：原创数学环面线稿，无远程图片依赖。
 - `assets/favicon.svg`：个人标记。
 
@@ -31,7 +32,10 @@ python3 -m http.server 4173 --bind 127.0.0.1
 - 参考 [Simplefolio](https://github.com/cobiwave/simplefolio) 的单页叙事思路，以及 [al-folio](https://github.com/alshedivat/al-folio) 的学术内容组织。
 - 本次排版、CSS、交互代码及 SVG 均为重新实现，没有复制上述模板源码或素材，因此没有引入模板依赖。
 - 所有字体使用系统字体；没有第三方追踪、远程字体、在线图库或运行时库。
+- 装饰参考：[Rough Notation](https://github.com/rough-stuff/rough-notation) 的手绘圈注、[Codrops On-Scroll Path Animations](https://github.com/codrops/OnScrollPathAnimations/) 的路径绘制、[css-doodle](https://css-doodle.com/) 的几何构图，以及 [pattern.css](https://github.com/bansal/pattern.css) 的局部底纹。均以原生 CSS/SVG 重新绘制，没有引入其代码或依赖。
 
 ## 可访问性
 
 包含跳过导航链接、键盘焦点样式、原生 `details/summary`、输入框标签、动态结果播报，以及减少动态效果偏好适配。手机导航支持 Escape 关闭，并返回菜单按钮焦点。
+
+首屏右上角的暂停按钮可停止装饰动效；圆章与环面离开可视区后会自动暂停。系统开启减少动态效果时，图形保持静态。插图与纹理都标记为装饰，避免干扰屏幕阅读器。
