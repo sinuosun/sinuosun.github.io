@@ -1,751 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sinuo Sun | PKU</title>
-  <style>
-    :root {
-      --bg: #f4f1ea;
-      --panel: #11110f;
-      --panel-soft: #1b1a17;
-      --text: #151515;
-      --muted: #666158;
-      --line: #d9d1c4;
-      --soft: #ebe6dc;
-      --accent: #c96442;
-      --accent-soft: #ead2c6;
-      --white: #fffaf2;
-      --radius-xl: 28px;
-      --radius-md: 16px;
-      --shadow: 0 24px 80px rgba(33, 27, 18, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 15% 12%, rgba(201, 100, 66, 0.10), transparent 28%),
-        radial-gradient(circle at 82% 35%, rgba(0, 0, 0, 0.05), transparent 24%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      width: min(1180px, calc(100% - 44px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(21, 21, 21, 0.08);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .mark {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--text);
-      color: var(--bg);
-      display: grid;
-      place-items: center;
-      font-size: 13px;
-      transition: transform 0.35s ease;
-    }
-
-    .brand:hover .mark {
-      transform: rotate(-12deg) scale(1.08);
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      color: #26231f;
-      font-size: 14px;
-    }
-
-    nav a {
-      position: relative;
-      padding: 8px 0;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 3px;
-      width: 100%;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.25s ease;
-    }
-
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .mail-btn {
-      background: var(--text);
-      color: var(--bg);
-      border: 1px solid var(--text);
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-weight: 700;
-      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-    }
-
-    .mail-btn:hover {
-      transform: translateY(-2px);
-      background: transparent;
-      color: var(--text);
-    }
-
-    .quote-strip {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 36px 0 18px;
-      color: var(--muted);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(18px, 2.3vw, 28px);
-      line-height: 1.3;
-      text-align: center;
-    }
-
-    .quote-strip::before,
-    .quote-strip::after {
-      content: "";
-      width: min(120px, 12vw);
-      height: 1px;
-      background: var(--line);
-    }
-
-    .hero {
-      padding: 62px 0 58px;
-      display: grid;
-      grid-template-columns: 1.18fr 0.82fr;
-      gap: 76px;
-      align-items: end;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(54px, 9vw, 112px);
-      line-height: 0.93;
-      letter-spacing: -0.07em;
-      max-width: 760px;
-    }
-
-    .underline {
-      text-decoration: underline;
-      text-decoration-thickness: 0.07em;
-      text-underline-offset: 0.10em;
-      text-decoration-color: rgba(21, 21, 21, 0.75);
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .underline:hover {
-      text-decoration-color: var(--accent);
-    }
-
-    .hero-copy {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(20px, 2vw, 30px);
-      line-height: 1.18;
-      color: #201c18;
-      max-width: 420px;
-    }
-
-    .hero-copy span {
-      color: var(--muted);
-    }
-
-    .feature-panel {
-      min-height: 420px;
-      margin-bottom: 78px;
-      border-radius: var(--radius-xl);
-      background: var(--panel);
-      color: var(--white);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      box-shadow: var(--shadow);
-      position: relative;
-      isolation: isolate;
-    }
-
-    .feature-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(115deg, transparent 0 50%, rgba(255, 255, 255, 0.05) 50% 51%, transparent 51%),
-        radial-gradient(circle at var(--mx, 72%) var(--my, 44%), rgba(201, 100, 66, 0.24), transparent 22%);
-      z-index: -1;
-      transition: opacity 0.3s ease;
-    }
-
-    .panel-copy {
-      padding: clamp(34px, 6vw, 80px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .panel-copy h2 {
-      margin: 0 0 24px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(48px, 7vw, 96px);
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-      font-weight: 500;
-    }
-
-    .panel-copy p {
-      margin: 0;
-      color: rgba(255, 250, 242, 0.76);
-      font-size: 18px;
-      line-height: 1.55;
-      max-width: 380px;
-    }
-
-    .pattern {
-      position: relative;
-      min-height: 360px;
-      border-left: 1px solid rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-    }
-
-    .cell {
-      position: absolute;
-      border: 1px solid rgba(255, 250, 242, 0.72);
-      border-radius: 34% 66% 49% 51% / 44% 48% 52% 56%;
-      opacity: 0.38;
-      transform: rotate(var(--r));
-      transition: transform 0.35s ease, opacity 0.35s ease, border-color 0.35s ease;
-    }
-
-    .feature-panel:hover .cell {
-      opacity: 0.72;
-      border-color: rgba(255, 250, 242, 0.95);
-      transform: rotate(calc(var(--r) + 8deg)) scale(1.04);
-    }
-
-    .cell:nth-child(1) { width: 150px; height: 120px; left: 10%; top: 15%; --r: 8deg; }
-    .cell:nth-child(2) { width: 180px; height: 136px; left: 42%; top: 10%; --r: -14deg; }
-    .cell:nth-child(3) { width: 128px; height: 156px; left: 72%; top: 24%; --r: 18deg; }
-    .cell:nth-child(4) { width: 210px; height: 150px; left: 20%; top: 48%; --r: -4deg; }
-    .cell:nth-child(5) { width: 170px; height: 190px; left: 56%; top: 46%; --r: 11deg; }
-    .cell:nth-child(6) { width: 115px; height: 112px; left: 4%; top: 72%; --r: -19deg; }
-
-    .section-title {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin: 0 0 22px;
-      border-top: 1px solid var(--line);
-      padding-top: 28px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-    .section-title p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 420px;
-      line-height: 1.55;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 70px;
-    }
-
-    .card {
-      min-height: 252px;
-      background: rgba(255, 250, 242, 0.42);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 250, 242, 0.72);
-      box-shadow: 0 18px 60px rgba(33, 27, 18, 0.10);
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.02em;
-    }
-
-    .card p {
-      margin: 16px 0 0;
-      color: var(--muted);
-      line-height: 1.58;
-    }
-
-    .card .tag {
-      width: fit-content;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .card .detail {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.3s ease;
-    }
-
-    .card .detail > div {
-      overflow: hidden;
-    }
-
-    .card.active .detail {
-      grid-template-rows: 1fr;
-    }
-
-    .question-box {
-      background: var(--soft);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      padding: clamp(26px, 5vw, 48px);
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 28px;
-      align-items: center;
-      margin-bottom: 70px;
-    }
-
-    .question-box h2 {
-      margin: 0;
-      font-size: clamp(32px, 4vw, 56px);
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-    .question-box p {
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 18px 0 0;
-    }
-
-    .prompt-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 8px;
-    }
-
-    .prompt-row input {
-      width: 100%;
-      border: 0;
-      outline: none;
-      background: transparent;
-      padding: 12px 8px;
-      font: inherit;
-      color: var(--text);
-    }
-
-    .prompt-row button {
-      border: 0;
-      background: var(--text);
-      color: var(--bg);
-      border-radius: 10px;
-      padding: 12px 15px;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: transform 0.18s ease, background 0.18s ease;
-    }
-
-    .prompt-row button:hover {
-      transform: translateY(-2px);
-      background: var(--accent);
-    }
-
-    .answer {
-      margin-top: 14px;
-      color: var(--muted);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 18px;
-      line-height: 1.5;
-      min-height: 56px;
-    }
-
-    footer {
-      padding: 32px 0 46px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(14px);
-      animation: fadeIn 0.75s ease forwards;
-    }
-
-    .delay-1 { animation-delay: 0.08s; }
-    .delay-2 { animation-delay: 0.16s; }
-    .delay-3 { animation-delay: 0.24s; }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 900px) {
-      nav {
-        display: none;
-      }
-
-      .hero,
-      .feature-panel,
-      .question-box {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        gap: 30px;
-        padding-top: 42px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .section-title {
-        display: block;
-      }
-
-      .section-title p {
-        margin-top: 14px;
-      }
-
-      .pattern {
-        min-height: 300px;
-        border-left: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      footer {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .page {
-        width: min(100% - 26px, 1180px);
-      }
-
-      .quote-strip::before,
-      .quote-strip::after {
-        display: none;
-      }
-
-      .topbar {
-        height: 64px;
-      }
-
-      .mail-btn {
-        padding: 9px 12px;
-      }
-
-      .feature-panel {
-        border-radius: 20px;
-      }
-
-      .panel-copy,
-      .card,
-      .question-box {
-        padding: 22px;
-      }
-
-      .prompt-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ee">
+  <meta name="description" content="Sinuo Sun — undergraduate at Peking University, exploring mathematics, embedded systems, and AI agents. A personal field notebook for thinking, building, and revising.">
+  <meta property="og:title" content="Sinuo Sun — A personal field notebook">
+  <meta property="og:description" content="At the intersection of rigorous structure and imaginative construction. Mathematics · Engineering · AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sinuosun.github.io/">
+  <title>Sinuo Sun — A personal field notebook</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="details.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
-      <a class="brand" href="#top" aria-label="Sinuo Sun homepage">
-        <span class="mark">S</span>
-        <span>Sinuo Sun</span>
-      </a>
-
-      <nav aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#focus">Focus</a>
-        <a href="#questions">Questions</a>
-      </nav>
-
-      <a class="mail-btn" href="mailto:Monet_Snow@outlook.com">Contact</a>
-    </header>
-
-    <main id="top">
-      <div class="quote-strip fade-in">认知始于对无知的承认，你今日因何而疑惑？</div>
-
-      <section class="hero">
-        <div class="fade-in delay-1">
-          <div class="eyebrow">Peking University · College of Engineering</div>
-          <h1>
-            Learning at the edge of <span class="underline">systems</span>,
-            <span class="underline">reasoning</span>, and <span class="underline">creation</span>.
-          </h1>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+    <symbol id="arrow-down" viewBox="0 0 24 24"><path d="M12 3v18M5 14l7 7 7-7"/></symbol>
+    <symbol id="sun" viewBox="0 0 80 80"><path d="M40 0v80M0 40h80M12 12l56 56M12 68l56-56M25 3l30 74M3 25l74 30M3 55l74-30M25 77 55 3"/></symbol>
+  </svg>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="header page-width">
+    <a class="brand" href="#top" aria-label="Sinuo Sun — home"><span class="brand-mark">s.</span><span>Sinuo Sun<span class="brand-caption" data-i18n="brandCaption">A PERSONAL FIELD NOTEBOOK</span></span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation"><a href="#about" data-i18n="navAbout">About</a><a href="#explorations" data-i18n="navExplore">Explorations</a><a href="#questions" data-i18n="navQuestion">A question</a></nav>
+    <div class="header-actions">
+      <button class="language-button" id="language-toggle" type="button" aria-label="切换为中文" hidden><span aria-hidden="true">EN <span class="language-divider">/</span> 中</span></button>
+      <a class="contact-link" href="mailto:Monet_Snow@outlook.com"><span data-i18n="contact">Say hello</span><svg><use href="#arrow"/></svg></a>
+      <button class="menu-button" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-nav" aria-expanded="false" hidden><span></span><span></span></button>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="#about" data-i18n="navAbout">About</a><a href="#explorations" data-i18n="navExplore">Explorations</a><a href="#questions" data-i18n="navQuestion">A question</a><a href="mailto:Monet_Snow@outlook.com" data-i18n="contact">Say hello</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero page-width" id="top" aria-labelledby="hero-title">
+      <div class="hero-intro reveal">
+        <span class="margin-note" aria-hidden="true">FIELD NOTES / 001</span>
+        <p class="eyebrow"><span class="status-dot"></span><span data-i18n="affiliation">PEKING UNIVERSITY · COLLEGE OF ENGINEERING</span></p>
+        <h1 id="hero-title">Sinuo<br><span class="surname">Sun<span class="name-period">.</span></span><svg class="name-sun" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="seal-path" d="M80 80m-61 0a61 61 0 1 1 122 0a61 61 0 1 1-122 0"/></defs><circle class="seal-ring" cx="80" cy="80" r="76"/><text class="seal-type"><textPath href="#seal-path" textLength="382">THINK · BUILD · REVISE · STAY CURIOUS · </textPath></text><svg class="seal-sun" x="55" y="55" width="50" height="50"><use href="#sun"/></svg></svg></h1>
+        <p class="hero-description" data-i18n="heroDescription">Between rigorous structure<br>and imaginative construction.</p>
+        <div class="hero-bottom"><p data-i18n="heroRole">Undergraduate. Always a student.<br>Currently exploring what comes next.</p><a class="round-link" href="#about" aria-label="Explore about me"><svg><use href="#arrow-down"/></svg></a></div>
+      </div>
+      <figure class="hero-art reveal">
+        <span class="plate-corner corner-tl" aria-hidden="true"></span><span class="plate-corner corner-tr" aria-hidden="true"></span><span class="plate-corner corner-bl" aria-hidden="true"></span><span class="plate-corner corner-br" aria-hidden="true"></span>
+        <div class="art-top"><span>FIG. 01 — THE SHAPE OF CURIOSITY</span><button class="motion-toggle" id="motion-toggle" type="button" aria-label="Pause decorative motion" aria-pressed="false" hidden><span class="motion-icon" aria-hidden="true"></span></button></div>
+        <div class="specimen-note" aria-hidden="true"><span>a thought, taking shape</span><svg viewBox="0 0 75 40"><path d="M72 2C46-1 20 6 12 31m-7-8 7 9 11-4"/></svg></div>
+        <div class="orbit-wrap"><img src="assets/orbit.svg" width="640" height="640" alt="An original mathematical illustration: fine green curves form an interwoven torus in three dimensions."><span class="orbit-coordinate coordinate-one">x → idea</span><span class="orbit-coordinate coordinate-two">y → experiment</span><span class="orbit-coordinate coordinate-three">z → understanding</span></div>
+        <figcaption><span class="art-title" data-i18n="artTitle">Everything begins<br>with a question.</span><span class="art-index">01 / ∞<span data-i18n="artFootnote">AN ONGOING EXPLORATION</span></span></figcaption>
+      </figure>
+      <div class="hero-footnote"><span data-i18n="based">BASED IN BEIJING, CHINA</span><span class="hero-quote" lang="zh-CN">认知始于对无知的承认。</span><span>SCROLL TO EXPLORE ↓</span></div>
+    </section>
+    <section class="about page-width section-space" id="about" aria-labelledby="about-title">
+      <div class="section-label"><span class="section-number">01 /</span><span data-i18n="aboutLabel">A LITTLE CONTEXT</span></div>
+      <div class="about-content">
+        <div class="about-title-group reveal"><h2 class="editorial-title" id="about-title" data-i18n="aboutTitle">Think deeply.<br>Build something.<br><em>Think again.</em></h2><svg class="pencil-underline" viewBox="0 0 300 16" aria-hidden="true"><path pathLength="1" class="sketch-stroke" d="M3 10Q128-3 296 6M8 14Q172 2 283 11"/></svg><svg class="thought-flow" viewBox="0 0 330 80" aria-hidden="true"><text x="5" y="30">idea</text><text x="124" y="30">prototype</text><text x="264" y="30">revision</text><path class="flow-arrow sketch-stroke" pathLength="1" d="M44 26Q79 7 112 24m-8-8 9 8-12 4M204 26q25-18 50-3m-8-7 9 7-12 4"/><path class="flow-return" d="M300 44Q166 93 17 45m1 10-2-11 12 1"/><text class="flow-caption" x="116" y="72">repeat, with curiosity.</text></svg></div>
+        <div class="about-copy reveal"><p class="lead" data-i18n="aboutLead">I’m an undergraduate at Peking University, finding my way through mathematics, embedded systems, and AI agents.</p><p data-i18n="aboutBody">I like turning abstract ideas into working prototypes, and confusing questions into clearer models. For me, engineering is a disciplined way of seeing — a conversation between what we imagine and what actually works.</p><p data-i18n="aboutPersonal">Away from the technical side, photography, literature, and writing remind me to pay attention to the human experience.</p><a class="text-link" href="https://github.com/sinuosun" target="_blank" rel="noopener noreferrer"><span data-i18n="githubLink">Find me on GitHub</span><svg><use href="#arrow"/></svg></a></div>
+      </div>
+      <div class="principles"><span data-i18n="principleOne">RIGOR IN THOUGHT</span><svg aria-hidden="true"><use href="#sun"/></svg><span data-i18n="principleTwo">CURIOSITY IN PRACTICE</span><svg aria-hidden="true"><use href="#sun"/></svg><span data-i18n="principleThree">ROOM TO RECONSIDER</span></div>
+    </section>
+    <section class="explorations" id="explorations" aria-labelledby="explore-title">
+      <div class="page-width section-space">
+        <div class="section-label"><span class="section-number">02 /</span><span data-i18n="exploreLabel">AREAS OF EXPLORATION</span><span class="label-aside" data-i18n="exploreAside">THREE THREADS. MANY CONNECTIONS.</span></div>
+        <div class="explore-heading reveal"><h2 class="editorial-title" id="explore-title" data-i18n="exploreTitle">Following the<br><em>interesting questions.</em></h2><p data-i18n="exploreIntro">Not a finished map.<br>A few directions I keep returning to.</p></div>
+        <div class="exploration-list">
+          <details class="exploration-row reveal" open>
+            <summary><span class="row-number">I.</span><span class="row-heading"><span class="row-kicker" data-i18n="mathKicker">THE LANGUAGE OF STRUCTURE</span><span class="row-title" data-i18n="mathTitle">Mathematics</span></span><span class="row-tags" data-i18n="mathTags">Analysis / Algebra / Physics</span><span class="expand-mark" aria-hidden="true"></span></summary>
+            <div class="exploration-detail"><div class="mini-diagram math-diagram" aria-hidden="true"><span class="axis x-axis"></span><span class="axis y-axis"></span><span class="math-circle"></span><span class="math-line"></span><span class="math-formula">e<sup>iθ</sup> = cos θ + i sin θ</span></div><div><p data-i18n="mathBody">Mathematics gives me a language for describing structure precisely. I’m building foundations in analysis, linear algebra, and physics, with a curiosity for the geometry behind the symbols.</p><p class="detail-note" data-i18n="mathNote">On my mind: eigenvalues, geometric intuition, optimization, and how abstract concepts become computational tools.</p></div></div>
+          </details>
+          <details class="exploration-row reveal">
+            <summary><span class="row-number">II.</span><span class="row-heading"><span class="row-kicker" data-i18n="systemsKicker">WHERE CODE MEETS THE WORLD</span><span class="row-title" data-i18n="systemsTitle">Embedded systems</span></span><span class="row-tags" data-i18n="systemsTags">Sensors / Robotics / Feedback</span><span class="expand-mark" aria-hidden="true"></span></summary>
+            <div class="exploration-detail"><div class="mini-diagram circuit-diagram" aria-hidden="true"><span class="circuit-line"></span><span class="chip">IN → OUT</span><span class="circuit-caption">SENSE · COMPUTE · ACT</span></div><div><p data-i18n="systemsBody">I’m drawn to the small, concrete details that make hardware behave correctly: signals, sensors, motion, and imperfect real-world feedback.</p><p class="detail-note" data-i18n="systemsNote">The question: how do you turn a clean idea into a system that works under messy constraints?</p></div></div>
+          </details>
+          <details class="exploration-row reveal">
+            <summary><span class="row-number">III.</span><span class="row-heading"><span class="row-kicker" data-i18n="aiKicker">INTELLIGENCE, IN COLLABORATION</span><span class="row-title" data-i18n="aiTitle">AI &amp; agents</span></span><span class="row-tags" data-i18n="aiTags">Reasoning / Memory / Tools</span><span class="expand-mark" aria-hidden="true"></span></summary>
+            <div class="exploration-detail"><div class="mini-diagram agent-diagram" aria-hidden="true"><span class="agent-node node-one">HUMAN</span><span class="agent-node node-two">AGENT</span><span class="agent-node node-three">TOOLS</span><span class="agent-caption">A COOPERATIVE LOOP</span></div><div><p data-i18n="aiBody">I’m exploring how agents reason, interact, remember, and support human creativity while keeping human judgment at the center.</p><p class="detail-note" data-i18n="aiNote">Earlier game-agent experiments are paused. The broader question remains: how should intelligent tools cooperate with us?</p></div></div>
+          </details>
         </div>
-
-        <p class="hero-copy fade-in delay-2">
-          I am an undergraduate student exploring mathematics, embedded systems, and AI agents.
-          <span>My interests live between rigorous structure and imaginative construction.</span>
-        </p>
-      </section>
-
-      <section class="feature-panel fade-in delay-3" aria-label="Personal introduction panel">
-        <div class="panel-copy">
-          <h2>Think,<br />build,<br />revise.</h2>
-          <p>
-            I enjoy turning abstract ideas into working prototypes, and turning confusing questions
-            into clearer models. For me, engineering is not only implementation, but also a disciplined way of seeing.
-          </p>
-        </div>
-        <div class="pattern" aria-hidden="true">
-          <span class="cell"></span>
-          <span class="cell"></span>
-          <span class="cell"></span>
-          <span class="cell"></span>
-          <span class="cell"></span>
-          <span class="cell"></span>
-        </div>
-      </section>
-
-      <section id="about">
-        <div class="section-title">
-          <h2>About me</h2>
-          <p>
-            A compact personal page for academic identity, technical exploration, and future projects.
-            Click the cards below for a little more context.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">Foundation</span>
-              <h3>Mathematics as language</h3>
-              <p>
-                I am building a foundation in analysis, linear algebra, and physics, treating mathematics as a way to describe structure precisely.
-              </p>
-              <div class="detail"><div><p>
-                Current curiosities include eigenvalues, geometric intuition, optimization, and the way abstract concepts become computational tools.
-              </p></div></div>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">Engineering</span>
-              <h3>Systems that touch reality</h3>
-              <p>
-                I am interested in embedded systems, sensors, robotics, and the small but concrete details that make hardware behave correctly.
-              </p>
-              <div class="detail"><div><p>
-                I like projects where code meets signals, motion, constraints, and imperfect real-world feedback.
-              </p></div></div>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">AI</span>
-              <h3>Agents, cognition, and tools</h3>
-              <p>
-                I am exploring how AI agents can reason, interact, remember, and assist human creativity without replacing human judgment.
-              </p>
-              <div class="detail"><div><p>
-                Earlier game-agent experiments are currently paused, but the broader question remains: how should intelligent tools cooperate with us?
-              </p></div></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="focus">
-        <div class="section-title">
-          <h2>Current focus</h2>
-          <p>
-            No fixed flagship project for now. The page is designed to leave space for future work, notes, essays, and prototypes.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">Learning</span>
-              <h3>Core coursework</h3>
-              <p>Mathematical analysis, higher algebra, general physics, data structures, and algorithmic thinking.</p>
-              <div class="detail"><div><p>These are not only courses, but also the grammar of future engineering work.</p></div></div>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">Making</span>
-              <h3>Small prototypes</h3>
-              <p>Practical experiments in Python, web design, embedded development, and local AI-assisted workflows.</p>
-              <div class="detail"><div><p>Small projects are a low-risk way to test ideas before they become larger systems.</p></div></div>
-            </div>
-          </article>
-
-          <article class="card" tabindex="0">
-            <div>
-              <span class="tag">Reflection</span>
-              <h3>Writing and perception</h3>
-              <p>Photography, literature, and essays help me keep technical work connected with human experience.</p>
-              <div class="detail"><div><p>Clarity is not only a property of code or proofs; it is also a habit of attention.</p></div></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="questions" class="question-box">
-        <div>
-          <h2>What are you curious about?</h2>
-          <p>
-            A small interactive corner: type a question or press the button, and the page will return a reflective prompt.
-          </p>
-        </div>
-
-        <div>
-          <div class="prompt-row">
-            <input id="questionInput" type="text" placeholder="Type a question, e.g. What should I build next?" />
-            <button id="askButton">Reflect</button>
-          </div>
-          <div id="answer" class="answer">Try asking something. The best questions usually reveal the next step.</div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>© <span id="year"></span> Sinuo Sun</span>
-      <span>Peking University · Beijing · <a href="mailto:Monet_Snow@outlook.com">Monet_Snow@outlook.com</a></span>
-    </footer>
-  </div>
-
-  <script>
-    const panel = document.querySelector('.feature-panel');
-    panel.addEventListener('pointermove', (event) => {
-      const rect = panel.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width) * 100;
-      const y = ((event.clientY - rect.top) / rect.height) * 100;
-      panel.style.setProperty('--mx', `${x}%`);
-      panel.style.setProperty('--my', `${y}%`);
-    });
-
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card) => {
-      const toggle = () => card.classList.toggle('active');
-      card.addEventListener('click', toggle);
-      card.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          toggle();
-        }
-      });
-    });
-
-    const prompts = [
-      'Can this question be made smaller, sharper, and testable?',
-      'What assumption is hidden inside this question?',
-      'Which part is a fact, which part is a feeling, and which part is still unknown?',
-      'What would a simple prototype reveal within one afternoon?',
-      'If the answer were obvious in hindsight, what pattern would it probably have?',
-      'What would change if you explained this to a beginner?'
-    ];
-
-    const input = document.getElementById('questionInput');
-    const button = document.getElementById('askButton');
-    const answer = document.getElementById('answer');
-
-    button.addEventListener('click', () => {
-      const question = input.value.trim();
-      const base = prompts[Math.floor(Math.random() * prompts.length)];
-      answer.textContent = question ? `For “${question}”: ${base}` : base;
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+      </div>
+    </section>
+    <section class="now page-width section-space" id="now" aria-labelledby="now-title">
+      <div class="section-label"><span class="section-number">03 /</span><span data-i18n="nowLabel">ON THE DESK, RIGHT NOW</span></div>
+      <div class="now-heading reveal"><h2 class="editorial-title" id="now-title" data-i18n="nowTitle">A work in <em>progress.</em></h2><p data-i18n="nowIntro">Building foundations, trying small things,<br>leaving space for what comes next.</p></div>
+      <div class="now-grid">
+        <article class="now-item reveal"><div class="item-top"><span>01</span><span class="tiny-dot"></span></div><div class="notebook-figure" aria-hidden="true"><svg viewBox="0 0 320 130"><path class="figure-grid" d="M20 28H300M20 65H300M20 102H300M65 12V118M125 12V118M185 12V118M245 12V118"/><path class="figure-axis" d="M20 65H304m-6-4 6 4-6 4M65 116V12m-4 6 4-6 4 6"/><path class="sketch-stroke wave-line" pathLength="1" d="M21 85C44 85 44 35 68 35S94 95 122 95 150 35 178 35 206 95 234 95 263 35 293 35"/><circle class="figure-point" cx="178" cy="35" r="4"/><text x="265" y="117">f(x) →</text></svg></div><h3 data-i18n="learningTitle">Learning the fundamentals</h3><p data-i18n="learningBody">Mathematical analysis, higher algebra, general physics, data structures, and algorithmic thinking.</p><span class="item-foot" data-i18n="learningFoot">THE GRAMMAR OF FUTURE WORK</span></article>
+        <article class="now-item reveal"><div class="item-top"><span>02</span><svg aria-hidden="true"><use href="#arrow"/></svg></div><div class="notebook-figure" aria-hidden="true"><svg viewBox="0 0 320 130"><path class="figure-grid" d="M20 28H300M20 65H300M20 102H300M65 12V118M125 12V118M185 12V118M245 12V118"/><path class="sketch-stroke" pathLength="1" d="M24 44H65V65H122m76 0h42V28h56M24 97h58V81h40m76 0h59v26h39M140 30V15m20 15V15m20 15V15m-40 85v15m20-15v15m20-15v15"/><rect x="122" y="30" width="76" height="70" rx="2"/><rect x="133" y="41" width="54" height="48" class="chip-core"/><path class="circuit-pulse" d="M144 65h8l5-12 7 24 6-12h8"/><circle class="figure-point" cx="24" cy="44" r="3"/><circle class="figure-point" cx="296" cy="28" r="3"/><text x="263" y="123">in / out</text></svg></div><h3 data-i18n="makingTitle">Making small experiments</h3><p data-i18n="makingBody">Python, web design, embedded development, and local AI-assisted workflows. Small prototypes to test bigger ideas.</p><span class="item-foot" data-i18n="makingFoot">MAKE IT. TEST IT. REVISE IT.</span></article>
+        <article class="now-item reveal"><div class="item-top"><span>03</span><svg aria-hidden="true"><use href="#sun"/></svg></div><div class="notebook-figure" aria-hidden="true"><svg viewBox="0 0 320 130"><g transform="rotate(-9 110 65)"><path d="M38 12h133v105H38z"/><path class="sketch-stroke" pathLength="1" d="M48 23h113v69H48zM48 80l32-28 26 19 20-13 35 26"/><circle class="figure-point" cx="139" cy="40" r="7"/><path class="figure-axis" d="M84 103h42"/></g><g class="book-sketch" transform="rotate(8 230 70)"><path d="M180 33q25-10 49 2 25-12 50-2v70q-25-10-50 2-24-12-49-2zM229 35v70"/><path class="sketch-stroke" pathLength="1" d="M189 48q16-5 31 1m-31 12q16-5 31 1m18-14q15-5 31-1m-31 14q15-5 31-1m-31 14q15-5 31-1"/></g><text x="256" y="124">look closer.</text></svg></div><h3 data-i18n="reflectTitle">Practicing attention</h3><p data-i18n="reflectBody">Photography, literature, and essays. Keeping technical curiosity connected to life beyond the screen.</p><span class="item-foot" data-i18n="reflectFoot">CLARITY IS A HABIT OF ATTENTION</span></article>
+      </div>
+      <p class="now-postscript" data-i18n="nowPostscript">No flagship project for now. This notebook leaves room for future work, notes, and prototypes.</p>
+    </section>
+    <section class="questions page-width" id="questions" aria-labelledby="question-title">
+      <div class="question-inner">
+        <span class="paper-fold" aria-hidden="true"></span>
+        <div class="question-heading"><div class="section-label"><span class="section-number">04 /</span><span data-i18n="questionLabel">A SMALL THOUGHT EXPERIMENT</span></div><h2 class="editorial-title" id="question-title" data-i18n="questionTitle">What made you<br><em>curious today?</em></h2><p lang="zh-CN">你今日因何而疑惑？</p><svg class="question-sun" aria-hidden="true"><use href="#sun"/></svg></div>
+        <div class="question-interaction"><p class="question-intro" data-i18n="questionIntro">Bring a question. Leave with another way to see it.</p><form id="reflection-form"><label for="question-input" data-i18n="questionInputLabel">YOUR QUESTION</label><div class="input-line"><input id="question-input" name="question" type="text" maxlength="240" placeholder="What should I build next?" autocomplete="off" data-placeholder="questionPlaceholder"><button type="submit" aria-label="Reflect on your question" id="reflect-button"><svg><use href="#arrow"/></svg></button></div><p class="question-privacy" data-i18n="questionPrivacy">A little reflection tool, not an AI chat. Nothing is sent or saved.</p></form><div class="reflection-result"><span class="result-label" data-i18n="perspectiveLabel">A DIFFERENT PERSPECTIVE</span><p id="reflection-answer" aria-live="polite" aria-atomic="true" data-i18n="initialPrompt">What would a simple prototype reveal in one afternoon?</p><button id="another-prompt" class="text-link" type="button"><span data-i18n="anotherPrompt">Turn it over again</span><span aria-hidden="true">↻</span></button></div><noscript><p>This corner needs JavaScript to offer another prompt. You can still take the question above with you.</p></noscript></div>
+      </div>
+    </section>
+    <section class="contact page-width section-space" aria-labelledby="contact-title"><div class="section-label"><span class="section-number">05 /</span><span data-i18n="contactLabel">KEEP THE CONVERSATION GOING</span></div><svg class="contact-orbits" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="154"/><ellipse cx="200" cy="200" rx="190" ry="73" transform="rotate(-35 200 200)"/><ellipse cx="200" cy="200" rx="190" ry="73" transform="rotate(35 200 200)"/><path d="M200 4v392M4 200h392"/><circle class="orbit-point" cx="326" cy="110" r="5"/></svg><div class="contact-heading"><h2 id="contact-title" class="editorial-title reveal" data-i18n="contactTitle">Good ideas begin<br>with <em>a hello.</em></h2><a class="contact-arrow" href="mailto:Monet_Snow@outlook.com" aria-label="Email Sinuo Sun"><svg><use href="#arrow"/></svg></a></div><div class="contact-bottom"><a class="email-link" href="mailto:Monet_Snow@outlook.com">Monet_Snow@outlook.com</a><p data-i18n="contactNote">Questions, shared interests, or an interesting idea.<br>I’d be glad to hear from you.</p></div></section>
+  </main>
+  <footer class="footer page-width"><span>© <span id="year">2026</span> Sinuo Sun</span><span class="footer-note" data-i18n="footerNote">THINK. BUILD. REVISE. REPEAT.</span><a href="#top"><span data-i18n="backTop">Back to top</span><span aria-hidden="true">↑</span></a></footer>
 </body>
 </html>
